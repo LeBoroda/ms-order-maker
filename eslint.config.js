@@ -1,45 +1,49 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import ts from '@typescript-eslint/eslint-plugin'
-import { defineConfig, globalIgnores } from 'eslint/config'
+import js from '@eslint/js';
+import globals from 'globals';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
+import { FlatCompat } from '@eslint/eslintrc';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-export default defineConfig([
-  globalIgnores(['dist']),
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+});
+
+const compatConfigs = compat.extends(
+  'plugin:react/recommended',
+  'plugin:react-hooks/recommended',
+  'plugin:prettier/recommended'
+);
+
+export default tseslint.config(
   {
-    files: ['**/*.{ts,tsx}'],
-    languageOptions: {
-      ecmaVersion: 2020,
-      sourceType: 'module',
-      globals: globals.browser,
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-      parser: '@typescript-eslint/parser',
-    },
-    plugins: {
-      react,
-      'react-hooks': reactHooks,
-      '@typescript-eslint': ts,
-      'react-refresh': reactRefresh,
-    },
-    extends: [
-      js.configs.recommended,
-      ts.configs.recommended,
-      react.configs.recommended,
-      reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
-      'plugin:prettier/recommended', // включаем prettier как часть ESLint
-    ],
-    rules: {
-      // Можно добавить кастомные правила, например:
-      'react/react-in-jsx-scope': 'off', // для React 17+
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-      'prettier/prettier': 'error',
-    },
+    ignores: ['dist'],
   },
-])
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  reactRefresh.configs.vite,
+  ...compatConfigs,
+  {
+    files: ['**/*.{ts,tsx,js,jsx}'],
+    languageOptions: {
+      globals: globals.browser,
+    },
+    rules: {
+      'react/react-in-jsx-scope': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
+      'prettier/prettier': 'error',
+      'react-refresh/only-export-components': 'off',
+      'react-hooks/set-state-in-effect': 'off',
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+  }
+);

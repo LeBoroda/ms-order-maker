@@ -1,6 +1,49 @@
-# React + TypeScript + Vite
+# MS Order Maker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Online order tool based on MoySklad API. Fetches available stock, allows authorized users to create orders, and sends email notifications to the sales department.
+
+## Setup
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Create a `.env` file in the root directory (copy from `.env.example`):
+```bash
+cp .env.example .env
+```
+
+3. Configure environment variables in `.env`:
+   - `VITE_MOYSKLAD_LOGIN` - MoySklad login for API token creation
+   - `VITE_MOYSKLAD_PASSWORD` - MoySklad password for API token creation
+   - `VITE_ORDER_NOTIFICATION_EMAIL` - Email address to receive order notifications
+
+**Important:** The `.env` file is gitignored and should never be committed to version control. Use `.env.example` as a template.
+
+## Development
+
+```bash
+npm run dev
+```
+
+## Testing
+
+```bash
+npm test
+```
+
+## Linting
+
+```bash
+npm run lint:fix
+```
+
+## Security Notes
+
+- Never commit `.env` files containing real credentials
+- The `.env.example` file contains placeholder values only
+- Credentials are stored locally and read at runtime via environment variables
 
 Currently, two official plugins are available:
 
@@ -40,15 +83,15 @@ export default defineConfig([
       // other options...
     },
   },
-])
+]);
 ```
 
 You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
 ```js
 // eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+import reactX from 'eslint-plugin-react-x';
+import reactDom from 'eslint-plugin-react-dom';
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -69,5 +112,5 @@ export default defineConfig([
       // other options...
     },
   },
-])
+]);
 ```
