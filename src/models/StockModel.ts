@@ -50,4 +50,3 @@ class StockModel {
 }
 
 export const stockModel = new StockModel();
-

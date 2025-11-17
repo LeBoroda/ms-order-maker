@@ -25,9 +25,15 @@ export default function StockPage() {
   const [status, setStatus] = useState<string | null>(null);
   const [isSubmitting, setSubmitting] = useState(false);
 
+  // Filter to show only products with available stock
+  const availableStock = useMemo(
+    () => stock.filter((item) => item.available > 0),
+    [stock]
+  );
+
   const lines = useMemo(
-    () => buildOrderLines(stock, quantities),
-    [stock, quantities]
+    () => buildOrderLines(availableStock, quantities),
+    [availableStock, quantities]
   );
 
   const totalPositions = lines.reduce(
@@ -102,16 +108,14 @@ export default function StockPage() {
         <form className="card" onSubmit={handleSubmit} aria-label="Order form">
           <div className="stock-table" role="table">
             <div className="stock-row stock-row--head" role="row">
-              <span role="columnheader">Article</span>
               <span role="columnheader">Name</span>
               <span role="columnheader">Available</span>
               <span role="columnheader">Price, ₽</span>
               <span role="columnheader">Quantity</span>
             </div>
 
-            {stock.map((item) => (
+            {availableStock.map((item) => (
               <div key={item.id} className="stock-row" role="row">
-                <span role="cell">{item.article}</span>
                 <span role="cell">{item.name}</span>
                 <span role="cell">{item.available}</span>
                 <span role="cell">{item.price.toLocaleString('ru-RU')}</span>

@@ -22,4 +22,3 @@ class StockController {
 }
 
 export const stockController = new StockController();
-

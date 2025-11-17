@@ -5,21 +5,25 @@ Online order tool based on MoySklad API. Fetches available stock, allows authori
 ## Setup
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Create a `.env` file in the root directory (copy from `.env.example`):
+
 ```bash
 cp .env.example .env
 ```
 
 3. Configure environment variables in `.env`:
-   - `VITE_MOYSKLAD_LOGIN` - MoySklad login for API token creation
-   - `VITE_MOYSKLAD_PASSWORD` - MoySklad password for API token creation
+   - `VITE_MOYSKLAD_TOKEN` - MoySklad API token for authentication
    - `VITE_ORDER_NOTIFICATION_EMAIL` - Email address to receive order notifications
 
-**Important:** The `.env` file is gitignored and should never be committed to version control. Use `.env.example` as a template.
+**Important:** 
+- The `.env` file is gitignored and should never be committed to version control. Use `.env.example` as a template.
+- **After creating or modifying the `.env` file, you must restart the development server** (`npm run dev`) for the changes to take effect. Vite only loads environment variables at startup.
+- The API token is stored securely in the `.env` file and is never exposed in the client-side code bundle.
 
 ## Development
 

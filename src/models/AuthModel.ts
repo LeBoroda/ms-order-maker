@@ -18,10 +18,7 @@ function resolvePriceLevel(email: string): PriceLevel | null {
 }
 
 function hasCredentials() {
-  return (
-    Boolean(readEnv('VITE_MOYSKLAD_LOGIN')) &&
-    Boolean(readEnv('VITE_MOYSKLAD_PASSWORD'))
-  );
+  return Boolean(readEnv('VITE_MOYSKLAD_TOKEN'));
 }
 
 interface AuthState {

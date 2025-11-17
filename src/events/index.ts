@@ -8,4 +8,3 @@ export const AppEvents = {
 } as const;
 
 export type AppEventKey = (typeof AppEvents)[keyof typeof AppEvents];
-

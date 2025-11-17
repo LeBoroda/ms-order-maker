@@ -60,10 +60,10 @@ export default function LoginPage() {
       </p>
 
       <p className="hint">
-        MoySklad credentials:{' '}
+        MoySklad API token:{' '}
         {hasCredentials
-          ? 'loaded from VITE_MOYSKLAD_LOGIN / VITE_MOYSKLAD_PASSWORD.'
-          : 'missing – set VITE_MOYSKLAD_LOGIN and VITE_MOYSKLAD_PASSWORD.'}
+          ? 'loaded from VITE_MOYSKLAD_TOKEN.'
+          : 'missing – set VITE_MOYSKLAD_TOKEN in .env file.'}
       </p>
     </section>
   );

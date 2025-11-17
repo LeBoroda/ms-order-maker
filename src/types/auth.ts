@@ -4,4 +4,3 @@ export interface UserProfile {
   email: string;
   priceLevel: PriceLevel;
 }
-

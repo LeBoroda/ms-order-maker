@@ -17,6 +17,9 @@ dist-ssr
 .env.local
 .env.*.local
 
+# Debug config files (may contain sensitive data)
+src/config/moysklad.debug.ts
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

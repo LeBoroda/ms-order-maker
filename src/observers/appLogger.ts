@@ -24,4 +24,3 @@ eventBus.on(AppEvents.StockFailed, (payload) => {
 eventBus.on(AppEvents.OrderSubmitted, (order) => {
   console.info('[EventBus] Order submitted', order);
 });
-
